@@ -9,9 +9,10 @@ Original code had several rarely used features and overcomplicated flags, so som
 
 Depends on python library [impacket](https://github.com/CoreSecurity/impacket).
 
-Operates in 4 modes:
+Operates in 3 modes:
 * Discover objects
 * Get multiple values in JSON
+* ~~Get one value~~ (deprecated)
 
 ## Command line parameters
 
@@ -146,10 +147,10 @@ Get disk I/O load:
 
 * Create template
 * If your credential file located not in /etc/zabbix/wmi.pw, then set template macro `{$WMI_AUTHFILE}` = `/path/to/wmi.pw`
-* Create discovery rule with external check script
+* Create discovery rule with external check script. Rule should look something like this `zbxwmi["-action","discover","-host","{HOST.HOST}","-fields","DeviceID,VolumeName","-filter","MediaType=12","Win32_LogicalDisk","{$WMI_AUTHFILE}",{HOST.CONN}]`
 * Create discrovery item prototypes
-  * Create main item to receive multiple values
-  * Create dependent items with JSON preprocessing
+  * Create main item to receive multiple values `	zbxwmi["-action","json","-host","{HOST.HOST}","-fields","DeviceID,FreeSpace,Size","-filter","DeviceID='{#WMI.DEVICEID}'","Win32_LogicalDisk","{$WMI_AUTHFILE}","{HOST.HOST}"]`
+  * Create dependent items `Size[{#WMI.DEVICEID}]` with JSON preprocessing `$[0].Size`
 * Create graph prototype
 * Optionally create trigger
 * Assign template to MS Windows hosts

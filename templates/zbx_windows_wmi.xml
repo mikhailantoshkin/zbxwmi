@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <zabbix_export>
-    <version>3.4</version>
-    <date>2018-03-20T10:43:41Z</date>
+    <version>4.2</version>
+    <date>2019-11-01T05:05:28Z</date>
     <groups>
         <group>
             <name>Templates/Operating Systems</name>
@@ -67,11 +67,31 @@
                         <step>
                             <type>12</type>
                             <params>$[0].PercentProcessorTime</params>
+                            <error_handler>0</error_handler>
+                            <error_handler_params/>
                         </step>
                     </preprocessing>
                     <jmx_endpoint/>
+                    <timeout>3s</timeout>
+                    <url/>
+                    <query_fields/>
+                    <posts/>
+                    <status_codes>200</status_codes>
+                    <follow_redirects>1</follow_redirects>
+                    <post_type>0</post_type>
+                    <http_proxy/>
+                    <headers/>
+                    <retrieve_mode>0</retrieve_mode>
+                    <request_method>0</request_method>
+                    <output_format>0</output_format>
+                    <allow_traps>0</allow_traps>
+                    <ssl_cert_file/>
+                    <ssl_key_file/>
+                    <ssl_key_password/>
+                    <verify_peer>0</verify_peer>
+                    <verify_host>0</verify_host>
                     <master_item>
-                        <key>zbxwmi[&quot;-action&quot;,&quot;json&quot;,&quot;-fields&quot;,&quot;PercentProcessorTime&quot;,&quot;-filter&quot;,&quot;Name&lt;&gt;'_Total'&quot;,&quot;Win32_PerfFormattedData_PerfOS_Processor&quot;,{HOST.HOST}]</key>
+                        <key>zbxwmi[&quot;-host&quot;,&quot;{HOST.HOST}&quot;,&quot;-action&quot;,&quot;json&quot;,&quot;-fields&quot;,&quot;PercentProcessorTime&quot;,&quot;-filter&quot;,&quot;Name&lt;&gt;'_Total'&quot;,&quot;Win32_PerfFormattedData_PerfOS_Processor&quot;,&quot;{$WMI_AUTHFILE}&quot;,{HOST.CONN}]</key>
                     </master_item>
                 </item>
                 <item>
@@ -115,11 +135,31 @@
                         <step>
                             <type>12</type>
                             <params>$[1].PercentProcessorTime</params>
+                            <error_handler>0</error_handler>
+                            <error_handler_params/>
                         </step>
                     </preprocessing>
                     <jmx_endpoint/>
+                    <timeout>3s</timeout>
+                    <url/>
+                    <query_fields/>
+                    <posts/>
+                    <status_codes>200</status_codes>
+                    <follow_redirects>1</follow_redirects>
+                    <post_type>0</post_type>
+                    <http_proxy/>
+                    <headers/>
+                    <retrieve_mode>0</retrieve_mode>
+                    <request_method>0</request_method>
+                    <output_format>0</output_format>
+                    <allow_traps>0</allow_traps>
+                    <ssl_cert_file/>
+                    <ssl_key_file/>
+                    <ssl_key_password/>
+                    <verify_peer>0</verify_peer>
+                    <verify_host>0</verify_host>
                     <master_item>
-                        <key>zbxwmi[&quot;-action&quot;,&quot;json&quot;,&quot;-fields&quot;,&quot;PercentProcessorTime&quot;,&quot;-filter&quot;,&quot;Name&lt;&gt;'_Total'&quot;,&quot;Win32_PerfFormattedData_PerfOS_Processor&quot;,{HOST.HOST}]</key>
+                        <key>zbxwmi[&quot;-host&quot;,&quot;{HOST.HOST}&quot;,&quot;-action&quot;,&quot;json&quot;,&quot;-fields&quot;,&quot;PercentProcessorTime&quot;,&quot;-filter&quot;,&quot;Name&lt;&gt;'_Total'&quot;,&quot;Win32_PerfFormattedData_PerfOS_Processor&quot;,&quot;{$WMI_AUTHFILE}&quot;,{HOST.CONN}]</key>
                     </master_item>
                 </item>
                 <item>
@@ -163,11 +203,31 @@
                         <step>
                             <type>12</type>
                             <params>$[2].PercentProcessorTime</params>
+                            <error_handler>0</error_handler>
+                            <error_handler_params/>
                         </step>
                     </preprocessing>
                     <jmx_endpoint/>
+                    <timeout>3s</timeout>
+                    <url/>
+                    <query_fields/>
+                    <posts/>
+                    <status_codes>200</status_codes>
+                    <follow_redirects>1</follow_redirects>
+                    <post_type>0</post_type>
+                    <http_proxy/>
+                    <headers/>
+                    <retrieve_mode>0</retrieve_mode>
+                    <request_method>0</request_method>
+                    <output_format>0</output_format>
+                    <allow_traps>0</allow_traps>
+                    <ssl_cert_file/>
+                    <ssl_key_file/>
+                    <ssl_key_password/>
+                    <verify_peer>0</verify_peer>
+                    <verify_host>0</verify_host>
                     <master_item>
-                        <key>zbxwmi[&quot;-action&quot;,&quot;json&quot;,&quot;-fields&quot;,&quot;PercentProcessorTime&quot;,&quot;-filter&quot;,&quot;Name&lt;&gt;'_Total'&quot;,&quot;Win32_PerfFormattedData_PerfOS_Processor&quot;,{HOST.HOST}]</key>
+                        <key>zbxwmi[&quot;-host&quot;,&quot;{HOST.HOST}&quot;,&quot;-action&quot;,&quot;json&quot;,&quot;-fields&quot;,&quot;PercentProcessorTime&quot;,&quot;-filter&quot;,&quot;Name&lt;&gt;'_Total'&quot;,&quot;Win32_PerfFormattedData_PerfOS_Processor&quot;,&quot;{$WMI_AUTHFILE}&quot;,{HOST.CONN}]</key>
                     </master_item>
                 </item>
                 <item>
@@ -211,11 +271,31 @@
                         <step>
                             <type>12</type>
                             <params>$[3].PercentProcessorTime</params>
+                            <error_handler>0</error_handler>
+                            <error_handler_params/>
                         </step>
                     </preprocessing>
                     <jmx_endpoint/>
+                    <timeout>3s</timeout>
+                    <url/>
+                    <query_fields/>
+                    <posts/>
+                    <status_codes>200</status_codes>
+                    <follow_redirects>1</follow_redirects>
+                    <post_type>0</post_type>
+                    <http_proxy/>
+                    <headers/>
+                    <retrieve_mode>0</retrieve_mode>
+                    <request_method>0</request_method>
+                    <output_format>0</output_format>
+                    <allow_traps>0</allow_traps>
+                    <ssl_cert_file/>
+                    <ssl_key_file/>
+                    <ssl_key_password/>
+                    <verify_peer>0</verify_peer>
+                    <verify_host>0</verify_host>
                     <master_item>
-                        <key>zbxwmi[&quot;-action&quot;,&quot;json&quot;,&quot;-fields&quot;,&quot;PercentProcessorTime&quot;,&quot;-filter&quot;,&quot;Name&lt;&gt;'_Total'&quot;,&quot;Win32_PerfFormattedData_PerfOS_Processor&quot;,{HOST.HOST}]</key>
+                        <key>zbxwmi[&quot;-host&quot;,&quot;{HOST.HOST}&quot;,&quot;-action&quot;,&quot;json&quot;,&quot;-fields&quot;,&quot;PercentProcessorTime&quot;,&quot;-filter&quot;,&quot;Name&lt;&gt;'_Total'&quot;,&quot;Win32_PerfFormattedData_PerfOS_Processor&quot;,&quot;{$WMI_AUTHFILE}&quot;,{HOST.CONN}]</key>
                     </master_item>
                 </item>
                 <item>
@@ -259,11 +339,31 @@
                         <step>
                             <type>12</type>
                             <params>$[4].PercentProcessorTime</params>
+                            <error_handler>0</error_handler>
+                            <error_handler_params/>
                         </step>
                     </preprocessing>
                     <jmx_endpoint/>
+                    <timeout>3s</timeout>
+                    <url/>
+                    <query_fields/>
+                    <posts/>
+                    <status_codes>200</status_codes>
+                    <follow_redirects>1</follow_redirects>
+                    <post_type>0</post_type>
+                    <http_proxy/>
+                    <headers/>
+                    <retrieve_mode>0</retrieve_mode>
+                    <request_method>0</request_method>
+                    <output_format>0</output_format>
+                    <allow_traps>0</allow_traps>
+                    <ssl_cert_file/>
+                    <ssl_key_file/>
+                    <ssl_key_password/>
+                    <verify_peer>0</verify_peer>
+                    <verify_host>0</verify_host>
                     <master_item>
-                        <key>zbxwmi[&quot;-action&quot;,&quot;json&quot;,&quot;-fields&quot;,&quot;PercentProcessorTime&quot;,&quot;-filter&quot;,&quot;Name&lt;&gt;'_Total'&quot;,&quot;Win32_PerfFormattedData_PerfOS_Processor&quot;,{HOST.HOST}]</key>
+                        <key>zbxwmi[&quot;-host&quot;,&quot;{HOST.HOST}&quot;,&quot;-action&quot;,&quot;json&quot;,&quot;-fields&quot;,&quot;PercentProcessorTime&quot;,&quot;-filter&quot;,&quot;Name&lt;&gt;'_Total'&quot;,&quot;Win32_PerfFormattedData_PerfOS_Processor&quot;,&quot;{$WMI_AUTHFILE}&quot;,{HOST.CONN}]</key>
                     </master_item>
                 </item>
                 <item>
@@ -307,11 +407,31 @@
                         <step>
                             <type>12</type>
                             <params>$[5].PercentProcessorTime</params>
+                            <error_handler>0</error_handler>
+                            <error_handler_params/>
                         </step>
                     </preprocessing>
                     <jmx_endpoint/>
+                    <timeout>3s</timeout>
+                    <url/>
+                    <query_fields/>
+                    <posts/>
+                    <status_codes>200</status_codes>
+                    <follow_redirects>1</follow_redirects>
+                    <post_type>0</post_type>
+                    <http_proxy/>
+                    <headers/>
+                    <retrieve_mode>0</retrieve_mode>
+                    <request_method>0</request_method>
+                    <output_format>0</output_format>
+                    <allow_traps>0</allow_traps>
+                    <ssl_cert_file/>
+                    <ssl_key_file/>
+                    <ssl_key_password/>
+                    <verify_peer>0</verify_peer>
+                    <verify_host>0</verify_host>
                     <master_item>
-                        <key>zbxwmi[&quot;-action&quot;,&quot;json&quot;,&quot;-fields&quot;,&quot;PercentProcessorTime&quot;,&quot;-filter&quot;,&quot;Name&lt;&gt;'_Total'&quot;,&quot;Win32_PerfFormattedData_PerfOS_Processor&quot;,{HOST.HOST}]</key>
+                        <key>zbxwmi[&quot;-host&quot;,&quot;{HOST.HOST}&quot;,&quot;-action&quot;,&quot;json&quot;,&quot;-fields&quot;,&quot;PercentProcessorTime&quot;,&quot;-filter&quot;,&quot;Name&lt;&gt;'_Total'&quot;,&quot;Win32_PerfFormattedData_PerfOS_Processor&quot;,&quot;{$WMI_AUTHFILE}&quot;,{HOST.CONN}]</key>
                     </master_item>
                 </item>
                 <item>
@@ -355,11 +475,31 @@
                         <step>
                             <type>12</type>
                             <params>$[6].PercentProcessorTime</params>
+                            <error_handler>0</error_handler>
+                            <error_handler_params/>
                         </step>
                     </preprocessing>
                     <jmx_endpoint/>
+                    <timeout>3s</timeout>
+                    <url/>
+                    <query_fields/>
+                    <posts/>
+                    <status_codes>200</status_codes>
+                    <follow_redirects>1</follow_redirects>
+                    <post_type>0</post_type>
+                    <http_proxy/>
+                    <headers/>
+                    <retrieve_mode>0</retrieve_mode>
+                    <request_method>0</request_method>
+                    <output_format>0</output_format>
+                    <allow_traps>0</allow_traps>
+                    <ssl_cert_file/>
+                    <ssl_key_file/>
+                    <ssl_key_password/>
+                    <verify_peer>0</verify_peer>
+                    <verify_host>0</verify_host>
                     <master_item>
-                        <key>zbxwmi[&quot;-action&quot;,&quot;json&quot;,&quot;-fields&quot;,&quot;PercentProcessorTime&quot;,&quot;-filter&quot;,&quot;Name&lt;&gt;'_Total'&quot;,&quot;Win32_PerfFormattedData_PerfOS_Processor&quot;,{HOST.HOST}]</key>
+                        <key>zbxwmi[&quot;-host&quot;,&quot;{HOST.HOST}&quot;,&quot;-action&quot;,&quot;json&quot;,&quot;-fields&quot;,&quot;PercentProcessorTime&quot;,&quot;-filter&quot;,&quot;Name&lt;&gt;'_Total'&quot;,&quot;Win32_PerfFormattedData_PerfOS_Processor&quot;,&quot;{$WMI_AUTHFILE}&quot;,{HOST.CONN}]</key>
                     </master_item>
                 </item>
                 <item>
@@ -403,11 +543,31 @@
                         <step>
                             <type>12</type>
                             <params>$[7].PercentProcessorTime</params>
+                            <error_handler>0</error_handler>
+                            <error_handler_params/>
                         </step>
                     </preprocessing>
                     <jmx_endpoint/>
+                    <timeout>3s</timeout>
+                    <url/>
+                    <query_fields/>
+                    <posts/>
+                    <status_codes>200</status_codes>
+                    <follow_redirects>1</follow_redirects>
+                    <post_type>0</post_type>
+                    <http_proxy/>
+                    <headers/>
+                    <retrieve_mode>0</retrieve_mode>
+                    <request_method>0</request_method>
+                    <output_format>0</output_format>
+                    <allow_traps>0</allow_traps>
+                    <ssl_cert_file/>
+                    <ssl_key_file/>
+                    <ssl_key_password/>
+                    <verify_peer>0</verify_peer>
+                    <verify_host>0</verify_host>
                     <master_item>
-                        <key>zbxwmi[&quot;-action&quot;,&quot;json&quot;,&quot;-fields&quot;,&quot;PercentProcessorTime&quot;,&quot;-filter&quot;,&quot;Name&lt;&gt;'_Total'&quot;,&quot;Win32_PerfFormattedData_PerfOS_Processor&quot;,{HOST.HOST}]</key>
+                        <key>zbxwmi[&quot;-host&quot;,&quot;{HOST.HOST}&quot;,&quot;-action&quot;,&quot;json&quot;,&quot;-fields&quot;,&quot;PercentProcessorTime&quot;,&quot;-filter&quot;,&quot;Name&lt;&gt;'_Total'&quot;,&quot;Win32_PerfFormattedData_PerfOS_Processor&quot;,&quot;{$WMI_AUTHFILE}&quot;,{HOST.CONN}]</key>
                     </master_item>
                 </item>
                 <item>
@@ -451,15 +611,37 @@
                         <step>
                             <type>12</type>
                             <params>$[0].DiskReadsPersec</params>
+                            <error_handler>0</error_handler>
+                            <error_handler_params/>
                         </step>
                         <step>
                             <type>9</type>
                             <params/>
+                            <error_handler>0</error_handler>
+                            <error_handler_params/>
                         </step>
                     </preprocessing>
                     <jmx_endpoint/>
+                    <timeout>3s</timeout>
+                    <url/>
+                    <query_fields/>
+                    <posts/>
+                    <status_codes>200</status_codes>
+                    <follow_redirects>1</follow_redirects>
+                    <post_type>0</post_type>
+                    <http_proxy/>
+                    <headers/>
+                    <retrieve_mode>0</retrieve_mode>
+                    <request_method>0</request_method>
+                    <output_format>0</output_format>
+                    <allow_traps>0</allow_traps>
+                    <ssl_cert_file/>
+                    <ssl_key_file/>
+                    <ssl_key_password/>
+                    <verify_peer>0</verify_peer>
+                    <verify_host>0</verify_host>
                     <master_item>
-                        <key>zbxwmi[&quot;-action&quot;,&quot;json&quot;,&quot;-fields&quot;,&quot;DiskWritesPersec,DiskWriteBytesPersec,DiskReadsPersec,DiskReadBytesPersec&quot;,&quot;-filter&quot;,&quot;Name='_Total'&quot;,&quot;Win32_PerfRawData_PerfDisk_LogicalDisk&quot;,{HOST.HOST}]</key>
+                        <key>zbxwmi[&quot;-host&quot;,&quot;{HOST.HOST}&quot;,&quot;-action&quot;,&quot;json&quot;,&quot;-fields&quot;,&quot;DiskWritesPersec,DiskWriteBytesPersec,DiskReadsPersec,DiskReadBytesPersec&quot;,&quot;-filter&quot;,&quot;Name='_Total'&quot;,&quot;Win32_PerfRawData_PerfDisk_LogicalDisk&quot;,&quot;{$WMI_AUTHFILE}&quot;,{HOST.CONN}]</key>
                     </master_item>
                 </item>
                 <item>
@@ -503,15 +685,37 @@
                         <step>
                             <type>12</type>
                             <params>$[0].DiskWritesPersec</params>
+                            <error_handler>0</error_handler>
+                            <error_handler_params/>
                         </step>
                         <step>
                             <type>9</type>
                             <params/>
+                            <error_handler>0</error_handler>
+                            <error_handler_params/>
                         </step>
                     </preprocessing>
                     <jmx_endpoint/>
+                    <timeout>3s</timeout>
+                    <url/>
+                    <query_fields/>
+                    <posts/>
+                    <status_codes>200</status_codes>
+                    <follow_redirects>1</follow_redirects>
+                    <post_type>0</post_type>
+                    <http_proxy/>
+                    <headers/>
+                    <retrieve_mode>0</retrieve_mode>
+                    <request_method>0</request_method>
+                    <output_format>0</output_format>
+                    <allow_traps>0</allow_traps>
+                    <ssl_cert_file/>
+                    <ssl_key_file/>
+                    <ssl_key_password/>
+                    <verify_peer>0</verify_peer>
+                    <verify_host>0</verify_host>
                     <master_item>
-                        <key>zbxwmi[&quot;-action&quot;,&quot;json&quot;,&quot;-fields&quot;,&quot;DiskWritesPersec,DiskWriteBytesPersec,DiskReadsPersec,DiskReadBytesPersec&quot;,&quot;-filter&quot;,&quot;Name='_Total'&quot;,&quot;Win32_PerfRawData_PerfDisk_LogicalDisk&quot;,{HOST.HOST}]</key>
+                        <key>zbxwmi[&quot;-host&quot;,&quot;{HOST.HOST}&quot;,&quot;-action&quot;,&quot;json&quot;,&quot;-fields&quot;,&quot;DiskWritesPersec,DiskWriteBytesPersec,DiskReadsPersec,DiskReadBytesPersec&quot;,&quot;-filter&quot;,&quot;Name='_Total'&quot;,&quot;Win32_PerfRawData_PerfDisk_LogicalDisk&quot;,&quot;{$WMI_AUTHFILE}&quot;,{HOST.CONN}]</key>
                     </master_item>
                 </item>
                 <item>
@@ -519,8 +723,8 @@
                     <type>10</type>
                     <snmp_community/>
                     <snmp_oid/>
-                    <key>zbxwmi[&quot;-action&quot;,&quot;json&quot;,&quot;-fields&quot;,&quot;DiskWritesPersec,DiskWriteBytesPersec,DiskReadsPersec,DiskReadBytesPersec&quot;,&quot;-filter&quot;,&quot;Name='_Total'&quot;,&quot;Win32_PerfRawData_PerfDisk_LogicalDisk&quot;,{HOST.HOST}]</key>
-                    <delay>5m</delay>
+                    <key>zbxwmi[&quot;-host&quot;,&quot;{HOST.HOST}&quot;,&quot;-action&quot;,&quot;json&quot;,&quot;-fields&quot;,&quot;DiskWritesPersec,DiskWriteBytesPersec,DiskReadsPersec,DiskReadBytesPersec&quot;,&quot;-filter&quot;,&quot;Name='_Total'&quot;,&quot;Win32_PerfRawData_PerfDisk_LogicalDisk&quot;,&quot;{$WMI_AUTHFILE}&quot;,{HOST.CONN}]</key>
+                    <delay>30s</delay>
                     <history>3600</history>
                     <trends>0</trends>
                     <status>0</status>
@@ -553,6 +757,24 @@
                     <logtimefmt/>
                     <preprocessing/>
                     <jmx_endpoint/>
+                    <timeout>3s</timeout>
+                    <url/>
+                    <query_fields/>
+                    <posts/>
+                    <status_codes>200</status_codes>
+                    <follow_redirects>1</follow_redirects>
+                    <post_type>0</post_type>
+                    <http_proxy/>
+                    <headers/>
+                    <retrieve_mode>0</retrieve_mode>
+                    <request_method>0</request_method>
+                    <output_format>0</output_format>
+                    <allow_traps>0</allow_traps>
+                    <ssl_cert_file/>
+                    <ssl_key_file/>
+                    <ssl_key_password/>
+                    <verify_peer>0</verify_peer>
+                    <verify_host>0</verify_host>
                     <master_item/>
                 </item>
                 <item>
@@ -560,8 +782,8 @@
                     <type>10</type>
                     <snmp_community/>
                     <snmp_oid/>
-                    <key>zbxwmi[&quot;-action&quot;,&quot;json&quot;,&quot;-fields&quot;,&quot;PercentProcessorTime&quot;,&quot;-filter&quot;,&quot;Name&lt;&gt;'_Total'&quot;,&quot;Win32_PerfFormattedData_PerfOS_Processor&quot;,{HOST.HOST}]</key>
-                    <delay>5m</delay>
+                    <key>zbxwmi[&quot;-host&quot;,&quot;{HOST.HOST}&quot;,&quot;-action&quot;,&quot;json&quot;,&quot;-fields&quot;,&quot;PercentProcessorTime&quot;,&quot;-filter&quot;,&quot;Name&lt;&gt;'_Total'&quot;,&quot;Win32_PerfFormattedData_PerfOS_Processor&quot;,&quot;{$WMI_AUTHFILE}&quot;,{HOST.CONN}]</key>
+                    <delay>1m</delay>
                     <history>3600</history>
                     <trends>0</trends>
                     <status>0</status>
@@ -594,6 +816,24 @@
                     <logtimefmt/>
                     <preprocessing/>
                     <jmx_endpoint/>
+                    <timeout>3s</timeout>
+                    <url/>
+                    <query_fields/>
+                    <posts/>
+                    <status_codes>200</status_codes>
+                    <follow_redirects>1</follow_redirects>
+                    <post_type>0</post_type>
+                    <http_proxy/>
+                    <headers/>
+                    <retrieve_mode>0</retrieve_mode>
+                    <request_method>0</request_method>
+                    <output_format>0</output_format>
+                    <allow_traps>0</allow_traps>
+                    <ssl_cert_file/>
+                    <ssl_key_file/>
+                    <ssl_key_password/>
+                    <verify_peer>0</verify_peer>
+                    <verify_host>0</verify_host>
                     <master_item/>
                 </item>
             </items>
@@ -603,7 +843,7 @@
                     <type>10</type>
                     <snmp_community/>
                     <snmp_oid/>
-                    <key>zbxwmi[&quot;-action&quot;,&quot;discover&quot;,&quot;-k&quot;,&quot;DeviceID&quot;,&quot;-fields&quot;,&quot;VolumeName&quot;,&quot;-filter&quot;,&quot;MediaType=12&quot;,&quot;Win32_LogicalDisk&quot;,{HOST.HOST}]</key>
+                    <key>zbxwmi[&quot;-action&quot;,&quot;discover&quot;,&quot;-host&quot;,&quot;{HOST.HOST}&quot;,&quot;-fields&quot;,&quot;DeviceID,VolumeName&quot;,&quot;-filter&quot;,&quot;MediaType=12&quot;,&quot;Win32_LogicalDisk&quot;,&quot;{$WMI_AUTHFILE}&quot;,{HOST.CONN}]</key>
                     <delay>1h</delay>
                     <status>0</status>
                     <allowed_hosts/>
@@ -671,17 +911,37 @@
                                 <step>
                                     <type>12</type>
                                     <params>$[0].FreeSpace</params>
+                                    <error_handler>0</error_handler>
+                                    <error_handler_params/>
                                 </step>
                             </preprocessing>
                             <jmx_endpoint/>
+                            <timeout>3s</timeout>
+                            <url/>
+                            <query_fields/>
+                            <posts/>
+                            <status_codes>200</status_codes>
+                            <follow_redirects>1</follow_redirects>
+                            <post_type>0</post_type>
+                            <http_proxy/>
+                            <headers/>
+                            <retrieve_mode>0</retrieve_mode>
+                            <request_method>0</request_method>
+                            <output_format>0</output_format>
+                            <allow_traps>0</allow_traps>
+                            <ssl_cert_file/>
+                            <ssl_key_file/>
+                            <ssl_key_password/>
+                            <verify_peer>0</verify_peer>
+                            <verify_host>0</verify_host>
                             <application_prototypes>
                                 <application_prototype>
                                     <name>Disk</name>
                                 </application_prototype>
                             </application_prototypes>
-                            <master_item_prototype>
-                                <key>zbxwmi[&quot;-action&quot;,&quot;json&quot;,&quot;-k&quot;,&quot;DeviceID&quot;,&quot;-fields&quot;,&quot;FreeSpace,Size&quot;,&quot;-item&quot;,&quot;{#WMI.DEVICEID}&quot;,&quot;Win32_LogicalDisk&quot;,&quot;{HOST.HOST}&quot;]</key>
-                            </master_item_prototype>
+                            <master_item>
+                                <key>zbxwmi[&quot;-action&quot;,&quot;json&quot;,&quot;-host&quot;,&quot;{HOST.HOST}&quot;,&quot;-fields&quot;,&quot;DeviceID,FreeSpace,Size&quot;,&quot;-filter&quot;,&quot;DeviceID='{#WMI.DEVICEID}'&quot;,&quot;Win32_LogicalDisk&quot;,&quot;{$WMI_AUTHFILE}&quot;,&quot;{HOST.HOST}&quot;]</key>
+                            </master_item>
                         </item_prototype>
                         <item_prototype>
                             <name>Size {#WMI.DEVICEID}</name>
@@ -724,17 +984,37 @@
                                 <step>
                                     <type>12</type>
                                     <params>$[0].Size</params>
+                                    <error_handler>0</error_handler>
+                                    <error_handler_params/>
                                 </step>
                             </preprocessing>
                             <jmx_endpoint/>
+                            <timeout>3s</timeout>
+                            <url/>
+                            <query_fields/>
+                            <posts/>
+                            <status_codes>200</status_codes>
+                            <follow_redirects>1</follow_redirects>
+                            <post_type>0</post_type>
+                            <http_proxy/>
+                            <headers/>
+                            <retrieve_mode>0</retrieve_mode>
+                            <request_method>0</request_method>
+                            <output_format>0</output_format>
+                            <allow_traps>0</allow_traps>
+                            <ssl_cert_file/>
+                            <ssl_key_file/>
+                            <ssl_key_password/>
+                            <verify_peer>0</verify_peer>
+                            <verify_host>0</verify_host>
                             <application_prototypes>
                                 <application_prototype>
                                     <name>Disk</name>
                                 </application_prototype>
                             </application_prototypes>
-                            <master_item_prototype>
-                                <key>zbxwmi[&quot;-action&quot;,&quot;json&quot;,&quot;-k&quot;,&quot;DeviceID&quot;,&quot;-fields&quot;,&quot;FreeSpace,Size&quot;,&quot;-item&quot;,&quot;{#WMI.DEVICEID}&quot;,&quot;Win32_LogicalDisk&quot;,&quot;{HOST.HOST}&quot;]</key>
-                            </master_item_prototype>
+                            <master_item>
+                                <key>zbxwmi[&quot;-action&quot;,&quot;json&quot;,&quot;-host&quot;,&quot;{HOST.HOST}&quot;,&quot;-fields&quot;,&quot;DeviceID,FreeSpace,Size&quot;,&quot;-filter&quot;,&quot;DeviceID='{#WMI.DEVICEID}'&quot;,&quot;Win32_LogicalDisk&quot;,&quot;{$WMI_AUTHFILE}&quot;,&quot;{HOST.HOST}&quot;]</key>
+                            </master_item>
                         </item_prototype>
                         <item_prototype>
                             <name>Used {#WMI.DEVICEID}</name>
@@ -775,19 +1055,37 @@
                             <logtimefmt/>
                             <preprocessing/>
                             <jmx_endpoint/>
+                            <timeout>3s</timeout>
+                            <url/>
+                            <query_fields/>
+                            <posts/>
+                            <status_codes>200</status_codes>
+                            <follow_redirects>1</follow_redirects>
+                            <post_type>0</post_type>
+                            <http_proxy/>
+                            <headers/>
+                            <retrieve_mode>0</retrieve_mode>
+                            <request_method>0</request_method>
+                            <output_format>0</output_format>
+                            <allow_traps>0</allow_traps>
+                            <ssl_cert_file/>
+                            <ssl_key_file/>
+                            <ssl_key_password/>
+                            <verify_peer>0</verify_peer>
+                            <verify_host>0</verify_host>
                             <application_prototypes>
                                 <application_prototype>
                                     <name>Disk</name>
                                 </application_prototype>
                             </application_prototypes>
-                            <master_item_prototype/>
+                            <master_item/>
                         </item_prototype>
                         <item_prototype>
                             <name>Disk info {#WMI.DEVICEID}</name>
                             <type>10</type>
                             <snmp_community/>
                             <snmp_oid/>
-                            <key>zbxwmi[&quot;-action&quot;,&quot;json&quot;,&quot;-k&quot;,&quot;DeviceID&quot;,&quot;-fields&quot;,&quot;FreeSpace,Size&quot;,&quot;-item&quot;,&quot;{#WMI.DEVICEID}&quot;,&quot;Win32_LogicalDisk&quot;,&quot;{HOST.HOST}&quot;]</key>
+                            <key>zbxwmi[&quot;-action&quot;,&quot;json&quot;,&quot;-host&quot;,&quot;{HOST.HOST}&quot;,&quot;-fields&quot;,&quot;DeviceID,FreeSpace,Size&quot;,&quot;-filter&quot;,&quot;DeviceID='{#WMI.DEVICEID}'&quot;,&quot;Win32_LogicalDisk&quot;,&quot;{$WMI_AUTHFILE}&quot;,&quot;{HOST.HOST}&quot;]</key>
                             <delay>5m</delay>
                             <history>3600</history>
                             <trends>0</trends>
@@ -821,12 +1119,30 @@
                             <logtimefmt/>
                             <preprocessing/>
                             <jmx_endpoint/>
+                            <timeout>3s</timeout>
+                            <url/>
+                            <query_fields/>
+                            <posts/>
+                            <status_codes>200</status_codes>
+                            <follow_redirects>1</follow_redirects>
+                            <post_type>0</post_type>
+                            <http_proxy/>
+                            <headers/>
+                            <retrieve_mode>0</retrieve_mode>
+                            <request_method>0</request_method>
+                            <output_format>0</output_format>
+                            <allow_traps>0</allow_traps>
+                            <ssl_cert_file/>
+                            <ssl_key_file/>
+                            <ssl_key_password/>
+                            <verify_peer>0</verify_peer>
+                            <verify_host>0</verify_host>
                             <application_prototypes>
                                 <application_prototype>
                                     <name>Disk</name>
                                 </application_prototype>
                             </application_prototypes>
-                            <master_item_prototype/>
+                            <master_item/>
                         </item_prototype>
                     </item_prototypes>
                     <trigger_prototypes>
@@ -910,17 +1226,42 @@
                     </graph_prototypes>
                     <host_prototypes/>
                     <jmx_endpoint/>
+                    <timeout>3s</timeout>
+                    <url/>
+                    <query_fields/>
+                    <posts/>
+                    <status_codes>200</status_codes>
+                    <follow_redirects>1</follow_redirects>
+                    <post_type>0</post_type>
+                    <http_proxy/>
+                    <headers/>
+                    <retrieve_mode>0</retrieve_mode>
+                    <request_method>0</request_method>
+                    <allow_traps>0</allow_traps>
+                    <ssl_cert_file/>
+                    <ssl_key_file/>
+                    <ssl_key_password/>
+                    <verify_peer>0</verify_peer>
+                    <verify_host>0</verify_host>
+                    <lld_macro_paths/>
+                    <preprocessing/>
+                    <master_item/>
                 </discovery_rule>
             </discovery_rules>
             <httptests/>
             <macros>
                 <macro>
                     <macro>{$WMI_AUTHFILE}</macro>
-                    <value>/etc/zabbix/wmi.pw</value>
+                    <value>/usr/lib/zabbix/wmi_cred/wmi.pw</value>
+                </macro>
+                <macro>
+                    <macro>{$WMI_AUTHFILE_TEST}</macro>
+                    <value>/usr/lib/zabbix/wmi_cred/{HOST.HOST}_wmi.pw</value>
                 </macro>
             </macros>
             <templates/>
             <screens/>
+            <tags/>
         </template>
     </templates>
     <graphs>

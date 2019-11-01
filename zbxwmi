@@ -1,224 +1,160 @@
 #!/usr/bin/env python3
-#
-# zbxwmi : discovery and bulk checks of WMI items with Zabbix
-# Requires impacket (python pkg) and optionally zabbix_sender
-#
-# Author:
-#  Vitaly Chekryzhev (13hakta@gmail.com)
 
-import argparse, sys, os
+import argparse
+import configparser
+import os
+import sys
+import json
 
-def main():
-	parser = argparse.ArgumentParser(add_help = True, description = "Zabbix WMI connector")
-	parser.add_argument('-v', '--version', action='version', version='0.1.2')
-	parser.add_argument('cls', metavar='class', help='WMI class')
-	parser.add_argument('target', help='target address')
-
-	parser.add_argument('-action', default='get', choices=['get', 'bulk', 'json', 'discover', 'both'], help='Action to take (default: %(default)s)')
-	parser.add_argument('-namespace', default='//./root/cimv2', help='namespace name (default: %(default)s)')
-
-	parser.add_argument('-key', help='Key')
-	parser.add_argument('-fields', help='Field list delimited by comma')
-	parser.add_argument('-filter', default='', help='Filter')
-	parser.add_argument('-item', default='', help='Selected item')
-
-	group = parser.add_argument_group('Zabbix')
-
-	group.add_argument('-server', metavar='address', default='127.0.0.1', help='Zabbix server (default: %(default)s)')
-	group.add_argument('-sender', metavar='path', default='/usr/bin/zabbix_sender', help='Zabbix sender (default: %(default)s)')
-
-	group = parser.add_argument_group('Authentication')
-
-	group.add_argument('-cred', type=argparse.FileType('r'), default='/etc/zabbix/wmi.pw', help='Credential file (default: %(default)s)')
-
-	group.add_argument('-dc-ip', metavar = "ip address", help='IP Address of the domain controller. If '
-										'ommited it use the domain part (FQDN) specified in the target parameter')
-	group.add_argument('-rpc-auth-level', choices=['integrity', 'privacy', 'default'], nargs='?', default='default',
-										help='integrity (RPC_C_AUTHN_LEVEL_PKT_INTEGRITY) or privacy '
-													'(RPC_C_AUTHN_LEVEL_PKT_PRIVACY). (default: %(default)s)')
-
-	if len(sys.argv) == 1:
-			parser.print_help()
-			sys.exit(1)
-
-	options = parser.parse_args()
-
-	# Extract the arguments
-	emulatekey = False
-
-	if options.key:
-		key = options.key
-	else:
-		key = 'Name'
-		emulatekey = True
-
-	if (options.action == 'get' and options.fields and len(options.fields.split(',')) != 1):
-		print("action 'get' requires only one item")
-		exit(1)
-
-	username = options.cred.readline().strip()
-	password = options.cred.readline().strip()
-	domain = options.cred.readline().strip()
-
-	from impacket.dcerpc.v5.dtypes import NULL
-	from impacket.dcerpc.v5.dcom import wmi
-	from impacket.dcerpc.v5.dcomrt import DCOMConnection
-	from impacket.dcerpc.v5.rpcrt import RPC_C_AUTHN_LEVEL_PKT_PRIVACY, RPC_C_AUTHN_LEVEL_PKT_INTEGRITY, RPC_C_AUTHN_LEVEL_NONE
-
-	try:
-		dcom = DCOMConnection(options.target, username, password, domain, '', '', '', oxidResolver=True,
-													doKerberos=False, kdcHost=options.dc_ip)
-		iInterface = dcom.CoCreateInstanceEx(wmi.CLSID_WbemLevel1Login, wmi.IID_IWbemLevel1Login)
-		iWbemLevel1Login = wmi.IWbemLevel1Login(iInterface)
-		iWbemServices = iWbemLevel1Login.NTLMLogin(options.namespace, NULL, NULL)
-		if options.rpc_auth_level == 'privacy':
-			iWbemServices.get_dce_rpc().set_auth_level(RPC_C_AUTHN_LEVEL_PKT_PRIVACY)
-		elif options.rpc_auth_level == 'integrity':
-			iWbemServices.get_dce_rpc().set_auth_level(RPC_C_AUTHN_LEVEL_PKT_INTEGRITY)
-
-		iWbemLevel1Login.RemRelease()
-
-		# Construct the query
-		query = "SELECT "
-
-		if options.fields is None:
-			options.fields = key
-			query += key
-		else:
-			query += key + ',' + options.fields
-
-		query += " FROM " + options.cls
-
-		# Conditional request
-		if options.filter or options.item:
-			query += " WHERE "
-			wheres = []
-
-			if options.filter:
-				wheres.append(options.filter)
-
-			if options.item:
-				wheres.append(key + '="' + options.item + '"')
-
-			query += ' AND '.join(wheres)
-
-		response = []
-
-		try:
-			iEnum = iWbemServices.ExecQuery(query)
-
-			while True:
-				try:
-					pEnum = iEnum.Next(0xffffffff, 1)[0]
-					record = pEnum.getProperties()
-
-					j = {}
-
-					for k in record:
-						if type(record[k]['value']) is list:
-							j[k] = []
-							for item in record[k]['value']:
-								j[k].append(item)
-						else:
-							j[k] = record[k]['value']
-
-					response.append(j) # the response output
-				except Exception as e:
-					if str(e).find('S_FALSE') < 0:
-						raise
-					else:
-						break
-
-			iEnum.RemRelease()
-		except Exception as e:
-			print("An error occured: " + str(e))
-
-		iWbemServices.RemRelease()
-		dcom.disconnect()
-
-		# What to do with the results ?
-		if options.action == 'get':
-			print(str(response[0][options.fields]))
-		elif options.action == 'bulk':
-			send2zabbix(response, key, options.target, options.sender, options.server)
-		elif options.action == 'json':
-			send2zabbix_json(response)
-		elif options.action == 'discover':
-			discovery_json(response)
-		elif options.action == 'both': # Discover + bulk
-			send2zabbix(response, key, options.target, options.sender, options.server)
-			discovery_json(response)
-		else:
-			print("Invalid action.")
-			exit(1)
-	except Exception as e:
-		print("An error occured: " + str(e))
-		try:
-			dcom.disconnect()
-		except:
-			pass
+from impacket.dcerpc.v5.dtypes import NULL
+from impacket.dcerpc.v5.dcom import wmi
+from impacket.dcerpc.v5.dcomrt import DCOMConnection
+from impacket.dcerpc.v5.rpcrt import RPC_C_AUTHN_LEVEL_PKT_PRIVACY, RPC_C_AUTHN_LEVEL_PKT_INTEGRITY
 
 def discovery_json(data):
+    """
+    Display a JSON-formatted index for Zabbix LLD discovery
 
-	"""
-	Display a JSON-formatted index for Zabbix LLD discovery
+    """
 
-	"""
+    output = []
 
-	output = []
+    for item in data:
+        output.append({f'{{#WMI.{k.upper()}}}': v for k, v in item.items()})
+    print(json.dumps({'data': output}))
 
-	for eachItem in data:
-		res = []
-		for k in eachItem:
-			key = '{#WMI.' + k.upper() + '}'
-			res.append('"' + key + '": "' + str(eachItem[k]) + '"')
-		output.append('{' + ', '.join(res) + '}')
-
-	print('{ "data": [', ', '.join(output), '] }')
 
 def send2zabbix_json(data):
+    """
+    Display a JSON-formatted index for Zabbix bulk
 
-	"""
-	Display a JSON-forma	tted index for Zabbix bulk
-
-	"""
-
-	output = []
-
-	for eachItem in data:
-		res = []
-		for k in eachItem:
-			res.append('"' + k + '": "' + str(eachItem[k]) + '"')
-		output.append('{' + ', '.join(res) + '}')
-
-	print("[" + ','.join(output) + "]")
+    """
+    print(json.dumps(data))
 
 
-def send2zabbix(data, key, host, sender, server):
+def create_query(options):
+    fields = options.fields
+    cls = options.cls
 
-	"""
-	Bulk inserts data into Zabbix using zabbix_sender
+    query = f'SELECT {fields} FROM {cls}'
+    if options.filter:
+        query = f'{query} WHERE {options.filter}'
+    return query
 
-	"""
+def get_cred(options):
+    if not os.path.exists(options.cred):
+        raise FileNotFoundError('Credentials file does not exist in specified folder')
+    config = configparser.ConfigParser()
+    config.read(options.cred)
+    cred_host = options.host
+    try:
+        settings = dict(config.items(cred_host))
+    except Exception:
+        settings = dict(config.items('DEFAULT'))
+        cred_host = "DEFAULT"
+    try:
+        username = settings['username']
+        password = settings['password']
+        domain = settings['domain']
+    except KeyError:
+        print(f'You have an error in your credentials file!')
+        exit(1)
+    return cred_host, username, password, domain
 
-	# Contruct the input for zabbix_sender
-	output = ""
-	for eachItem in data:
-		val = "[" + str(eachItem.pop(key)) + "] "
-		for k in eachItem:
-			output += host + " " + k + val + str(eachItem[k]) + "\n"
+def main():
+    parser = argparse.ArgumentParser(add_help=True, description="Zabbix WMI connector v0.1.1")
+    parser.add_argument('cls', action='store', help='<WMI Class>')
+    parser.add_argument('cred', type=str, help='<Credential file>')
+    parser.add_argument('target', action='store', help='<targetName or address>')
 
-	# Send the values to the server
-	import subprocess
+    parser.add_argument('-action', action='store', default='get', choices=['get', 'json', 'discover'],
+                        help='The action to take')
+    parser.add_argument('-namespace', action='store', default='//./root/cimv2',
+                        help='namespace name (default //./root/cimv2)')
+    parser.add_argument('-fields', action='store', required=True, help='Field list delimited by comma')
+    parser.add_argument('-filter', action='store', default='', help='Filter')
+    parser.add_argument('-server', action='store', default='127.0.0.1', help='Zabbix server')
+    parser.add_argument('-sender', action='store', default='/usr/bin/zabbix_sender', help='Zabbix sender')
+    parser.add_argument('-host', action='store', default='DEFAULT', help='Hostname specified in cred config')
 
-	f = open(os.devnull, "w")
+    group = parser.add_argument_group('authentication')
 
-	try:
-		p = subprocess.Popen([sender, '-r', '-z', server, '-i', '-'], stdin=subprocess.PIPE, stdout=f, stderr=f)
-		p.communicate(output.encode())
-	except Exception as e:
-		print("An error occured with zabbix_sender. " + str(e))
-		exit(1)
+    group.add_argument('-dc-ip', action='store', metavar="ip address", help='IP Address of the domain controller. If '
+                                                                            'ommited it use the domain part (FQDN) specified in the target parameter')
+    group.add_argument('-rpc-auth-level', choices=['integrity', 'privacy', 'default'], nargs='?', default='default',
+                       help='default, integrity (RPC_C_AUTHN_LEVEL_PKT_INTEGRITY) or privacy '
+                            '(RPC_C_AUTHN_LEVEL_PKT_PRIVACY). For example CIM path "root/MSCluster" would require '
+                            'privacy level by default)')
+
+    if len(sys.argv) == 1:
+        parser.print_help()
+        sys.exit(1)
+
+    options = parser.parse_args()
+
+    if options.action == 'get' and options.fields and len(options.fields.split(',')) != 1:
+        print("action 'get' requires only one item")
+        exit(1)
+
+    cred_host, username, password, domain = get_cred(options)
+
+    try:
+        dcom = DCOMConnection(options.target, username, password, domain, '', '', '', oxidResolver=True,
+                              doKerberos=False, kdcHost=options.dc_ip)
+        iInterface = dcom.CoCreateInstanceEx(wmi.CLSID_WbemLevel1Login, wmi.IID_IWbemLevel1Login)
+        iWbemLevel1Login = wmi.IWbemLevel1Login(iInterface)
+        iWbemServices = iWbemLevel1Login.NTLMLogin(options.namespace, NULL, NULL)
+
+        if options.rpc_auth_level == 'privacy':
+            iWbemServices.get_dce_rpc().set_auth_level(RPC_C_AUTHN_LEVEL_PKT_PRIVACY)
+        elif options.rpc_auth_level == 'integrity':
+            iWbemServices.get_dce_rpc().set_auth_level(RPC_C_AUTHN_LEVEL_PKT_INTEGRITY)
+
+        iWbemLevel1Login.RemRelease()
+        query = create_query(options)
+
+        try:
+            iEnum = iWbemServices.ExecQuery(query)
+        except Exception as e:
+            dcom.disconnect()
+            print(e)
+            exit(1)
+
+        response = []
+        while True:
+            try:
+                pEnum = iEnum.Next(0xffffffff, 1)[0]
+                record = pEnum.getProperties()  # OrderdDict
+                response.append({k: v['value'] for k, v in record.items()})  # the response output
+            except Exception as e:
+                if str(e).find('S_FALSE') < 0:
+                    raise
+                else:
+                    break
+
+        iEnum.RemRelease()
+        iWbemServices.RemRelease()
+        dcom.disconnect()
+
+    except Exception as e:
+        if str(e) == 'rpc_s_access_denied':
+            print(f'An error has occurred! Check {cred_host} in {options.cred}!', e)
+        else:
+            print('An error has occurred: ', e)
+        try:
+            dcom.disconnect()
+        except:
+            pass
+        finally:
+            exit(1)
+
+    if options.action == 'get':
+        print(str(response[0][options.fields]))
+    elif options.action == 'json':
+        print(json.dumps(response))
+    elif options.action == 'discover':
+        discovery_json(response)
+
 
 if __name__ == '__main__':
-	main()
+    main()

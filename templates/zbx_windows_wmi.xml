@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <zabbix_export>
     <version>4.2</version>
-    <date>2019-11-01T05:05:28Z</date>
+    <date>2019-11-01T05:39:00Z</date>
     <groups>
         <group>
             <name>Templates/Operating Systems</name>
@@ -940,7 +940,7 @@
                                 </application_prototype>
                             </application_prototypes>
                             <master_item>
-                                <key>zbxwmi[&quot;-action&quot;,&quot;json&quot;,&quot;-host&quot;,&quot;{HOST.HOST}&quot;,&quot;-fields&quot;,&quot;DeviceID,FreeSpace,Size&quot;,&quot;-filter&quot;,&quot;DeviceID='{#WMI.DEVICEID}'&quot;,&quot;Win32_LogicalDisk&quot;,&quot;{$WMI_AUTHFILE}&quot;,&quot;{HOST.HOST}&quot;]</key>
+                                <key>zbxwmi[&quot;-action&quot;,&quot;json&quot;,&quot;-host&quot;,&quot;{HOST.HOST}&quot;,&quot;-fields&quot;,&quot;DeviceID,FreeSpace,Size&quot;,&quot;-filter&quot;,&quot;DeviceID='{#WMI.DEVICEID}'&quot;,&quot;Win32_LogicalDisk&quot;,&quot;{$WMI_AUTHFILE}&quot;,&quot;{HOST.CONN}&quot;]</key>
                             </master_item>
                         </item_prototype>
                         <item_prototype>
@@ -1013,7 +1013,7 @@
                                 </application_prototype>
                             </application_prototypes>
                             <master_item>
-                                <key>zbxwmi[&quot;-action&quot;,&quot;json&quot;,&quot;-host&quot;,&quot;{HOST.HOST}&quot;,&quot;-fields&quot;,&quot;DeviceID,FreeSpace,Size&quot;,&quot;-filter&quot;,&quot;DeviceID='{#WMI.DEVICEID}'&quot;,&quot;Win32_LogicalDisk&quot;,&quot;{$WMI_AUTHFILE}&quot;,&quot;{HOST.HOST}&quot;]</key>
+                                <key>zbxwmi[&quot;-action&quot;,&quot;json&quot;,&quot;-host&quot;,&quot;{HOST.HOST}&quot;,&quot;-fields&quot;,&quot;DeviceID,FreeSpace,Size&quot;,&quot;-filter&quot;,&quot;DeviceID='{#WMI.DEVICEID}'&quot;,&quot;Win32_LogicalDisk&quot;,&quot;{$WMI_AUTHFILE}&quot;,&quot;{HOST.CONN}&quot;]</key>
                             </master_item>
                         </item_prototype>
                         <item_prototype>
@@ -1085,7 +1085,7 @@
                             <type>10</type>
                             <snmp_community/>
                             <snmp_oid/>
-                            <key>zbxwmi[&quot;-action&quot;,&quot;json&quot;,&quot;-host&quot;,&quot;{HOST.HOST}&quot;,&quot;-fields&quot;,&quot;DeviceID,FreeSpace,Size&quot;,&quot;-filter&quot;,&quot;DeviceID='{#WMI.DEVICEID}'&quot;,&quot;Win32_LogicalDisk&quot;,&quot;{$WMI_AUTHFILE}&quot;,&quot;{HOST.HOST}&quot;]</key>
+                            <key>zbxwmi[&quot;-action&quot;,&quot;json&quot;,&quot;-host&quot;,&quot;{HOST.HOST}&quot;,&quot;-fields&quot;,&quot;DeviceID,FreeSpace,Size&quot;,&quot;-filter&quot;,&quot;DeviceID='{#WMI.DEVICEID}'&quot;,&quot;Win32_LogicalDisk&quot;,&quot;{$WMI_AUTHFILE}&quot;,&quot;{HOST.CONN}&quot;]</key>
                             <delay>5m</delay>
                             <history>3600</history>
                             <trends>0</trends>
